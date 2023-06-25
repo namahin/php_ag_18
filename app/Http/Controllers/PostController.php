@@ -13,29 +13,20 @@ class PostController extends Controller
         return DB::table('posts')->get();
     }
 
-    function postActionDelete(){
+    // Task 7
+    function postActionDelete($id){
         return DB::table('posts')
-            ->insert([
-                ['title' => 'Post Title 1',
-                'slug' => 'post-title-1',
-                'description' => 'Post Description 1',
-                'category_id' => 3],
-                ['title' => 'Post Title 2',
-                'slug' => 'post-title-2',
-                'description' => 'Post Description 2',
-                'category_id' => 2],
-                ['title' => 'Post Title 3',
-                'slug' => 'post-title-3',
-                'description' => 'Post Description 3',
-                'category_id' => 3],
-                ['title' => 'Post Title 4',
-                'slug' => 'post-title-4',
-                'description' => 'Post Description 4',
-                'category_id' => 4],
-                ['title' => 'Post Title 5',
-                'slug' => 'post-title-5',
-                'description' => 'Post Description 5',
-                'category_id' => 3],
-            ]);
+            ->where('id', $id)
+            ->delete();
+    }
+
+    // Task 9
+    public function postView(){
+        $posts = DB::table('posts')
+            ->select('posts.title', 'categories.name as category_name', 'posts.description')
+            ->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->get();
+
+        return view('posts', compact('posts'));
     }
 }

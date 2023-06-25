@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +21,12 @@ Route::get('/', [PostController::class, 'postAction']);
 
 // Task 7
 Route::get('/posts/{id}/delete', [PostController::class, 'postActionDelete']);
+
+// Task 9
+Route::get('/posts', [PostController::class, 'postView']);
+
+// Task 10
+Route::get('/categories/{id}/posts', [CategoryController::class, 'getPostsByCategory']);
+
+// Task 12
+//Route::get('/categories/{id}/latest-post', [CategoryController::class, 'getLatestPostByCategory']);
